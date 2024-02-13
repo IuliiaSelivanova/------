@@ -6,6 +6,8 @@ body{
     font-family: "Russo One", sans-serif;
     font-weight: 900;
     color: rgb(247, 222, 83);
+    font-size: 16px;
+    height: 100vh;
 }
 .container{
     display: flex;
@@ -31,6 +33,7 @@ body{
 .timer {
     margin-bottom: 4rem;
     font-size: 2rem;
+    text-align: center;
 }
 .button {
     background: none;
@@ -80,4 +83,22 @@ body{
 }
 .timer__item:last-child{
     margin-right: 0;
+}
+
+@media screen and (max-width: 500px) {
+    .title{
+        font-size: 3rem;
+    }
+    .timer {
+        font-size: 1rem;
+    }
+    .input__item{
+        width: 7rem;
+        height: 3rem;
+        font-size: 1.5rem;
+    }
+    .output.active .output__timer{
+        width: 15rem;
+        height: 15rem;
+    }
 }
