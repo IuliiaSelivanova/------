@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Таймер</h1>
+        <div class="input">
+            <label for="timer" class="timer">Введите время для отсчёта:</label>
+            <div class="timer">
+                <input id="minutes" class="input__item" type="number" placeholder="Минуты">
+                <span>:</span>
+                <input id="seconds" class="input__item" type="number" placeholder="Секунды">
+            </div>
+            <button id="launchBtn" class="button">Запуск</button>
+        </div>
+        <div class="output" id="output">
+            <div class="output__timer">
+                <div class="timer__item" id="output__minutes"></div>
+                <div class="timer__item">:</div>
+                <div class="timer__item" id="output__seconds"></div>
+            </div>
+        <button id="restartBtn" class="button">Запустить снова</button>
+        </div>
+    </div>
+</body>
+</html>
