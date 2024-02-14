@@ -2,6 +2,7 @@ const input = document.querySelector('.input'),
     inputMinutes = document.getElementById('minutes'),
     inputSeconds = document.getElementById('seconds'),
     output = document.getElementById('output'),
+    outputTime = document.querySelector('.output__timer'),
     outputMinutes = document.getElementById('output__minutes'),
     outputSeconds = document.getElementById('output__seconds'),
     launchBtn = document.getElementById('launchBtn'),
@@ -21,22 +22,23 @@ function startTimer(){
     let minutes = inputMinutes.value;
     let seconds = inputSeconds.value;
 
-    function outputSec(seconds){
+    function outputTimer(minutes, seconds){
         if (seconds >= 0 && seconds < 10){
-            outputSeconds.textContent = `0${seconds}`;
+            outputTime.textContent = `${minutes} : 0${seconds}`;
         } else {
-            outputSeconds.textContent = seconds;
+            outputTime.innerHTML = `${minutes} : ${seconds}`;
         }
     }
-    function outputMin(minutes){
-        if (minutes >= 0 && minutes < 10){
-            outputMinutes.textContent = `0${minutes}`;
-        } else {
-            outputMinutes.textContent = minutes;
-        }
-    }
-    outputMin(minutes);
-    outputSec(seconds);
+
+    outputTimer(minutes, seconds);
+
+    let totalSeconds = +minutes * 60 + +seconds;
+    let animate = `polygon ${totalSeconds} linear infinite`;
+    let newStyles = document.createElement('style');
+    document.head.append(newStyles);
+    newStyles.innerHTML = `.output__timer::before{
+        animation: polygon ${totalSeconds}s linear forwards;
+    }`;
 
     let timerId = setInterval(function setTime() {
         if (seconds == 0){
@@ -46,15 +48,13 @@ function startTimer(){
             }
             minutes--;
             seconds = 59;
-            outputMin(minutes);
-            outputSec(seconds);
-        } else {
+            outputTimer(minutes, seconds);
+        } else { 
             seconds--;
-            outputSec(seconds);
-            outputMin(minutes);
+            outputTimer(minutes, seconds);
         }
     }, 1000)
-
+    
 
     restartBtn.addEventListener('click', () => {
         clearInterval(timerId);
