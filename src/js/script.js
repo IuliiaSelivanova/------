@@ -10,23 +10,40 @@ const input = document.querySelector('.input'),
 
 launchBtn.addEventListener("click", startTimer);
 
+
+
 function startTimer(){
-    if (inputSeconds.value < 0 || inputSeconds.value > 60 || inputMinutes.value < 0){
-        alert('Ошибка! Введите корректные значения.')
+    if (inputSeconds.value < 0 || inputSeconds.value > 60 || inputMinutes.value < 0 || inputMinutes.value > 300){
+        document.querySelector('.modal-body').textContent = 'Введите корректные значения';
+        let myModal = new bootstrap.Modal(document.getElementById('myModal'));
+        myModal.show();
+        return
+    } else if ((inputSeconds.value == 0 && inputMinutes.value == 0) || inputSeconds.value == '' && inputMinutes.value == ''){
+        document.querySelector('.modal-body').textContent = 'Введите количество минут и секунд';
+        let myModal = new bootstrap.Modal(document.getElementById('myModal'));
+        myModal.show();
         return
     }
 
     input.classList.add('inactive');
     output.classList.add('active');
-    
+
     let minutes = inputMinutes.value;
     let seconds = inputSeconds.value;
 
     function outputTimer(minutes, seconds){
         if (seconds >= 0 && seconds < 10){
-            outputTime.textContent = `${minutes} : 0${seconds}`;
+            if(minutes >= 0 && minutes < 10){
+                outputTime.textContent = `0${minutes} : 0${seconds}`;
+            } else{
+                outputTime.textContent = `${minutes} : 0${seconds}`;
+            }
         } else {
-            outputTime.innerHTML = `${minutes} : ${seconds}`;
+            if(minutes >= 0 && minutes < 10){
+                outputTime.textContent = `0${minutes} : ${seconds}`;
+            } else{
+                outputTime.innerHTML = `${minutes} : ${seconds}`;
+            }
         }
     }
 
